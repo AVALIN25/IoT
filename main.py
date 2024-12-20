@@ -41,7 +41,7 @@ class IoTApplication:
         self.mqtt_client = mqtt.Client()
         self.mqtt_client.on_connect = self.mqtt_on_connect
         self.mqtt_client.on_message = self.mqtt_on_message
-        self.mqtt_broker = "test.mosquitto.org"
+        self.mqtt_broker = "10.40.81.71"
         self.mqtt_port = 1883
 
         # Подключение к MQTT-серверу
@@ -113,25 +113,32 @@ class IoTApplication:
         self.mqtt_client.publish(topic, message)
 
     def mqtt_on_connect(self, client, userdata, flags, rc):
-        if rc == 0:
-            self.log("Подключено к MQTT-брокеру")
-            self.mqtt_client.subscribe("iot/commands")
-        else:
-            self.log("Ошибка подключения к MQTT-брокеру")
+        try:
+            if rc == 0:
+                self.log("Подключено к MQTT-брокеру")
+                self.mqtt_client.subscribe("iot/commands")
+            else:
+                self.log("Ошибка подключения к MQTT-брокеру")
+        except Exception as e:
+            print(f"Ошибка в mqtt_on_connect: {e}")
 
     def mqtt_on_message(self, client, userdata, msg):
-        message = msg.payload.decode("utf-8")
-        self.log(f"Получено сообщение: {message}")
+        try:
+            message = msg.payload.decode("utf-8")
+            self.log(f"Получено сообщение: {message}")
 
-        # Обработка команды
-        if message == "TOGGLE_PUMP":
-            self.device.toggle_pump()
-        elif message == "AUTO_MODE_ON":
-            self.device.set_auto_mode(True)
-        elif message == "AUTO_MODE_OFF":
-            self.device.set_auto_mode(False)
+            # Обработка команды
+            if message == "TOGGLE_PUMP":
+                self.device.toggle_pump()
+            elif message == "AUTO_MODE_ON":
+                self.device.set_auto_mode(True)
+            elif message == "AUTO_MODE_OFF":
+                self.device.set_auto_mode(False)
 
-        self.root.after(0, self.update_ui)
+            # Обновление интерфейса
+            self.root.after(0, self.update_ui)
+        except Exception as e:
+            print(f"Ошибка в mqtt_on_message: {e}")
 
     def on_close(self):
         self.running = False
