@@ -41,7 +41,7 @@ class IoTApplication:
         self.mqtt_client = mqtt.Client()
         self.mqtt_client.on_connect = self.mqtt_on_connect
         self.mqtt_client.on_message = self.mqtt_on_message
-        self.mqtt_broker = "10.40.81.71"
+        self.mqtt_broker = "test.mosquitto.org"
         self.mqtt_port = 1883
 
         # Подключение к MQTT-серверу
