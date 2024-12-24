@@ -93,3 +93,4 @@ if __name__ == "__main__":
     # Инициализация Telegram-бота
     bot = IoTApplication(TELEGRAM_TOKEN, mqtt_client)
     bot.run()
+#fix
