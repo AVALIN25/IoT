@@ -84,7 +84,7 @@ class IoTApplication:
 
 # Запуск программы
 if __name__ == "__main__":
-    TELEGRAM_TOKEN = "7217111054:AAGqux25mcum4SveCrJYdxPjqgVzDDQeGBg"
+    TELEGRAM_TOKEN = ""
 
     # Инициализация MQTT клиента
     mqtt_client = MQTTClient()
