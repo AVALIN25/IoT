@@ -4,7 +4,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # Конфигурация MQTT
 MQTT_BROKER = "test.mosquitto.org"
-MQTT_PORT = 1883
+MQTT_PORT = ****
 TELEMETRY_TOPIC = "iot/soil_moisture"
 COMMANDS_TOPIC = "iot/commands"
 
@@ -84,7 +84,7 @@ class IoTApplication:
 
 # Запуск программы
 if __name__ == "__main__":
-    TELEGRAM_TOKEN = "7217111054:AAGqux25mcum4SveCrJYdxPjqgVzDDQeGBg"
+    TELEGRAM_TOKEN = "****"
 
     # Инициализация MQTT клиента
     mqtt_client = MQTTClient()
